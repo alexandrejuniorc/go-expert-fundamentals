@@ -18,5 +18,4 @@ func main() {
 
 	fmt.Println(minhaVar1)
 	fmt.Println(minhaVar2)
-
 }
