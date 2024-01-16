@@ -6,6 +6,7 @@ func main() {
 	total := func() int {
 		return sum(1, 2, 3) * 2
 	}()
+	
 	fmt.Println(total)
 }
 
