@@ -12,12 +12,12 @@ func main() {
 		panic(err)
 	}
 
+	defer request.Body.Close()
+
 	result, err := io.ReadAll(request.Body)
 	if err != nil {
 		panic(err)
 	}
-
 	println(string(result))
-	request.Body.Close()
 
 }
