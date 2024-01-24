@@ -6,7 +6,7 @@ import (
 	"net/http"
 )
 
-type ViaCEP struct {
+type ViaCep struct {
 	Cep         string `json:"cep"`
 	Logradouro  string `json:"logradouro"`
 	Complemento string `json:"complemento"`
@@ -36,9 +36,23 @@ func BuscaCepHandler(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
+	cep, error := BuscaCep(cepParam)
+	if error != nil {
+		w.WriteHeader(http.StatusInternalServerError)
+		return
+	}
+
 	w.Header().Set("Content-Type", "application/json")
 	w.WriteHeader(http.StatusOK)
-	w.Write([]byte("Hello World"))
+
+	//result, err := json.Marshal(cep) // convertendo para json guardando o resultado em result e guardando ele na variável
+	//if err != nil {
+	//	w.WriteHeader(http.StatusInternalServerError)
+	//	return
+	//}
+	//w.write(result)
+
+	json.NewEncoder(w).Encode(cep) // convertendo para json e setando como retorno no header
 }
 
 func BuscaCep(cep string) (*ViaCep, error) {
