@@ -13,7 +13,13 @@ type Curso struct {
 type Cursos []Curso
 
 func main() {
-	t := template.Must(template.New("content.html").ParseFiles("content.html"))
+	templates := []string{
+		"header.html",
+		"content.html",
+		"footer.html",
+	}
+
+	t := template.Must(template.New("content.html").ParseFiles(templates...))
 	err := t.Execute(os.Stdout, Cursos{
 		{Nome: "Curso de Go", CargaHoraria: 40},
 		{Nome: "Curso de Python", CargaHoraria: 20},

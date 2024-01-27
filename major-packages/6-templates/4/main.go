@@ -14,7 +14,7 @@ type Cursos []Curso
 
 func main() {
 	http.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
-		t := template.Must(template.New("template.html").ParseFiles("template.html"))
+		t := template.Must(template.New("content.html").ParseFiles("content.html"))
 		err := t.Execute(w, Cursos{
 			{Nome: "Curso de Go", CargaHoraria: 40},
 			{Nome: "Curso de Python", CargaHoraria: 20},
