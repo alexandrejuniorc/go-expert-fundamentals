@@ -12,7 +12,6 @@ func main() {
 }
 
 func handler(w http.ResponseWriter, r *http.Request) {
-
 	ctx := r.Context()
 	log.Println("Request iniciada")
 	defer log.Println("Request finalizada")
@@ -20,10 +19,10 @@ func handler(w http.ResponseWriter, r *http.Request) {
 	select {
 	case <-time.After(5 * time.Second):
 		// Imprime no comand line do servidor
-		log.Println("Request procesada com sucesso")
+		log.Println("Request processada com sucesso")
 
 		// Imprime no navegador
-		w.Write([]byte("Request procesada com sucesso"))
+		w.Write([]byte("Request processada com sucesso"))
 
 	case <-ctx.Done():
 		// Imprime no comand line do servidor
