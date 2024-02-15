@@ -36,6 +36,12 @@ func main() {
 	if err != nil {
 		panic(err)
 	}
+
+	product.price = 1999.90
+	err = updateProduct(db, product)
+	if err != nil {
+		panic(err)
+	}
 }
 
 func insertProduct(db *sql.DB, product *Product) error {
@@ -47,6 +53,22 @@ func insertProduct(db *sql.DB, product *Product) error {
 	defer statement.Close() // é importante fechar o statement após a execução
 
 	_, err = statement.Exec(product.ID, product.name, product.price) // executa a query com os valores passados
+	if err != nil {
+		return err
+	}
+
+	return nil
+}
+
+func updateProduct(db *sql.DB, product *Product) error {
+	statement, err := db.Prepare("UPDATE products SET name = ?, price = ? WHERE id = ?")
+	if err != nil {
+		return err
+	}
+
+	defer statement.Close()
+
+	_, err = statement.Exec(product.name, product.price, product.ID)
 	if err != nil {
 		return err
 	}
